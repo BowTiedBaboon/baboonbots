@@ -7,6 +7,6 @@
     "outDir": "dist",
     "declaration": true
   },
-  "include": ["./scripts", "./test", "./typechain"],
+  "include": ["./src", "./test", "./typechain-types", "environment.d.ts"],
   "files": ["./hardhat.config.ts"]
 }
