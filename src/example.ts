@@ -1,7 +1,7 @@
 import { ethers } from 'hardhat'
 import { BigNumber } from "ethers";
 import { formatUnits, parseUnits } from 'ethers/lib/utils'
-import { avalancheTokens as tokens, avalancheRouters as routers, avalancheFactories as factories } from './addresses'
+import { tokens, routers, factories } from './addresses/avalanche'
 import { getUniswapRouterAmountsOut, getUniswapPoolReservesFromTokens, getTokensOutFromTokensIn } from './utils'
 import 'dotenv/config'
 
