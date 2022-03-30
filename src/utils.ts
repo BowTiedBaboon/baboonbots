@@ -46,11 +46,11 @@ export const getUniswapPoolReservesFromTokens = async (factoryAddress: string, t
   if (token1.address != reserves[1][0]) throw 'token1 is incorrect'
 
   // Debug output
-  console.log('---------- getUniswapPoolReservesFromTokens() ---------')
-  console.log('LP Address:', liquidityPoolAddress)
-  console.log(token0.symbol, 'Reserves:', fixedBigNumber(reserves[0][1], token0.decimals, 5))
-  console.log(token1.symbol, 'Reserves:', fixedBigNumber(reserves[1][1], token0.decimals, 5))
-  console.log('-------------------------------------------------------')
+  // console.log('---------- getUniswapPoolReservesFromTokens() ---------')
+  // console.log('LP Address:', liquidityPoolAddress)
+  // console.log(token0.symbol, 'Reserves:', fixedBigNumber(reserves[0][1], token0.decimals, 5))
+  // console.log(token1.symbol, 'Reserves:', fixedBigNumber(reserves[1][1], token0.decimals, 5))
+  // console.log('-------------------------------------------------------')
 
   return reserves
 }
@@ -64,7 +64,7 @@ export const getUniswapPairAddressFromFactory = async (provider: Provider, facto
 // Use pool reserves to get tokens out from tokens in
 // Decimals will be entered automatically
 // @todo: Add documentation for arguments
-export const getTokensOutFromTokensIn = async (factoryAddress: string, token0: any, token0In: number, token1: any, token1In: number, feePercent: number, provider: Provider ) => {
+export const getTokensOutFromTokensIn = async (factoryAddress: string, token0: any, token0In: number, token1: any, token1In: number, feePercent: number, provider: Provider ): Promise<{bnTokensOut: BigNumber, floatTokensOut: number}> => {
   // Validate arguments
   if (token0In == 0 && token1In == 0) throw 'One token must have an amount in value'
   if (token0In != 0 && token1In != 0) throw 'Only one token can have an amount in value'
@@ -79,8 +79,18 @@ export const getTokensOutFromTokensIn = async (factoryAddress: string, token0: a
   const token1Reserves = reserves[1][1]
 
   // Use the proper input token
-  if (token0In > 0) console.log(calculateConstantProduct(token0InBigNumber, token0Reserves, token1Reserves, feePercent))
-  if (token1In > 0) console.log(calculateConstantProduct(token1InBigNumber, token1Reserves, token0Reserves, feePercent))
+  let tokensOut = parseUnits('0')
+  let tokensOutFixed = ''
+  if (token0In > 0) {
+    tokensOut = calculateConstantProduct(token0InBigNumber, token0Reserves, token1Reserves, feePercent)
+    console.log(token0In.toString(), token0.symbol, '→', fixedBigNumber(tokensOut, token1.decimals, 5), token1.symbol)
+  }
+  if (token1In > 0) {
+    tokensOut = calculateConstantProduct(token1InBigNumber, token1Reserves, token0Reserves, feePercent)
+    console.log(token1In.toString(), token1.symbol, '→', fixedBigNumber(tokensOut, token0.decimals, 5), token0.symbol)
+  }
+
+  return { bnTokensOut: tokensOut, floatTokensOut: parseFloat(fixedBigNumber(tokensOut, token0.decimals, 5)) }
 }
 
 // Constant product function
@@ -95,6 +105,7 @@ export const calculateConstantProduct = (tokenInAmount: BigNumber, tokenInReserv
   return one.div(two)
 }
 
+// Convert a BigNumber to a float with set number of decimal places
 export const fixedBigNumber = (input: BigNumber, decimals: number, fixed: number) => {
   return parseFloat(formatUnits(input, decimals)).toFixed(fixed)
 }
