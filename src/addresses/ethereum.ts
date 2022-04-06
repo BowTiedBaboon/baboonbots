@@ -1,7 +1,8 @@
 export const tokens = {
   ENS: { address: '0xC18360217D8F7Ab5e7c516566761Ea12Ce7F9D72', decimals: 18, symbol: 'ENS' },
-  WETH: { address: '0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2', decimals: 18, symbol: 'WETH' },
+  WETH: { address: '0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2', decimals: 18, symbol: 'WETH' },
   USDC: { address: '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48', decimals: 6, symbol: 'USDC' },
+  JPEG: { address: '0xe80c0cd204d654cebe8dd64a4857cab6be8345a3', decimals: 18, symbol: 'JPEG' },
 }
 
 export const routers = {

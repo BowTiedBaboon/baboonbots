@@ -1,7 +1,7 @@
 export const tokens = {
-  WETHe: { address: '0x49D5c2BdFfac6CE2BFdB6640F4F80f226bc10bAB', decimals: 18, symbol: 'WETH.e' },
+  WETHe: { address: '0x49d5c2bdffac6ce2bfdb6640f4f80f226bc10bab', decimals: 18, symbol: 'WETH.e' },
   USDTe: { address: '0xc7198437980c041c805A1EDcbA50c1Ce5db95118', decimals: 6, symbol: 'USDT.e' },
-  WAVAX: { address: '0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7', decimals: 18, symbol: 'WAVAX' },
+  WAVAX: { address: '0xb31f66aa3c1e785363f0875a1b74e27b85fd66c7', decimals: 18, symbol: 'WAVAX' },
   USDCe: { address: '0xA7D7079b0FEaD91F3e65f86E8915Cb59c1a4C664', decimals: 6, symbol: 'USDC.e' },
   MIM: { address: '0x130966628846BFd36ff31a822705796e8cb8C18D', decimals: 18, symbol: 'MIM' },
   wMEMO: { address: '0x0da67235dD5787D67955420C84ca1cEcd4E5Bb3b', decimals: 18, symbol: 'wMEMO' }
