@@ -42,8 +42,8 @@ export const getUniswapPoolReservesFromTokens = async (factoryAddress: string, t
   const reserves = await getUniswapPoolReserves(provider, liquidityPoolAddress)
 
   // Valid that token0 and token1 are correct
-  if (token0.address != reserves[0][0]) throw 'token0 is incorrect'
-  if (token1.address != reserves[1][0]) throw 'token1 is incorrect'
+  if (token0.address != reserves[0][0].toLowerCase()) throw 'token0 is incorrect'
+  if (token1.address != reserves[1][0].toLowerCase()) throw 'token1 is incorrect'
 
   // Debug output
   // console.log('---------- getUniswapPoolReservesFromTokens() ---------')
@@ -83,11 +83,11 @@ export const getTokensOutFromTokensIn = async (factoryAddress: string, token0: a
   let tokensOutFixed = ''
   if (token0In > 0) {
     tokensOut = calculateConstantProduct(token0InBigNumber, token0Reserves, token1Reserves, feePercent)
-    console.log(token0In.toString(), token0.symbol, '→', fixedBigNumber(tokensOut, token1.decimals, 5), token1.symbol)
+    // console.log(token0In.toString(), token0.symbol, '→', fixedBigNumber(tokensOut, token1.decimals, 10), token1.symbol)
   }
   if (token1In > 0) {
     tokensOut = calculateConstantProduct(token1InBigNumber, token1Reserves, token0Reserves, feePercent)
-    console.log(token1In.toString(), token1.symbol, '→', fixedBigNumber(tokensOut, token0.decimals, 5), token0.symbol)
+    // console.log(token1In.toString(), token1.symbol, '→', fixedBigNumber(tokensOut, token0.decimals, 10), token0.symbol)
   }
 
   return { bnTokensOut: tokensOut, floatTokensOut: parseFloat(fixedBigNumber(tokensOut, token0.decimals, 5)) }
